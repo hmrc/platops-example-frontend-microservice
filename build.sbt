@@ -4,6 +4,7 @@ import uk.gov.hmrc.DefaultBuildSettings.{addTestReportOption, defaultSettings, s
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 import uk.gov.hmrc.versioning.SbtGitVersioning
 import uk.gov.hmrc.SbtArtifactory
+import uk.gov.hmrc.versioning.SbtGitVersioning.majorVersion
 
 val appName: String = "platops-testing-open-repository"
 
@@ -15,6 +16,7 @@ lazy val microservice = Project(appName, file("."))
   .configs(IntegrationTest)
   .settings(inConfig(IntegrationTest)(Defaults.itSettings): _*)
   .settings(
+    majorVersion                                  := 0,
     scalaVersion                                  := "2.11.11",
     libraryDependencies                           ++= compile ++ test,
     retrieveManaged                               := true,
