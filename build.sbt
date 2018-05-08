@@ -16,7 +16,7 @@ lazy val microservice = Project(appName, file("."))
   .configs(IntegrationTest)
   .settings(inConfig(IntegrationTest)(Defaults.itSettings): _*)
   .settings(
-    majorVersion                                  := 0,
+    majorVersion                                  := 1,
     scalaVersion                                  := "2.11.11",
     libraryDependencies                           ++= compile ++ test,
     retrieveManaged                               := true,
