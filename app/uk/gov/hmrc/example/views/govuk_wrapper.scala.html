@@ -14,7 +14,7 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.platopstestingopenrepository.config.AppConfig
+@import uk.gov.hmrc.example.config.AppConfig
 @(appConfig: AppConfig,
   title: String,
   mainClass: Option[String] = None,
@@ -41,7 +41,7 @@
 
 @insideHeader = {
     @uiLayouts.header_nav(
-      navTitle = Some("platops-testing-open-repository"),
+      navTitle = Some("Platops example frontend microservice"),
       navTitleLink = None,
       showBetaLink = false,
       navLinks = Some(headerNavLinks))

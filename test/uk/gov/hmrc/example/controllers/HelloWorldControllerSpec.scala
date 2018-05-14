@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.platopstestingopenrepository.controllers
+package uk.gov.hmrc.example.controllers
 
 import org.scalatest.{Matchers, WordSpec}
 import org.scalatestplus.play.OneAppPerSuite
@@ -23,7 +23,7 @@ import play.api.i18n.{DefaultLangs, DefaultMessagesApi}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import play.api.{Configuration, Environment}
-import uk.gov.hmrc.platopstestingopenrepository.config.AppConfig
+import uk.gov.hmrc.example.config.AppConfig
 
 class HelloWorldControllerSpec extends WordSpec with Matchers with OneAppPerSuite {
   val fakeRequest = FakeRequest("GET", "/")

@@ -1,5 +1,5 @@
 # Add all the application routes to the app.routes file
-->         /platops-testing-open-repository              app.Routes
+->         /example                   app.Routes
 ->         /                          health.Routes
 ->     	   /template                  template.Routes
 
