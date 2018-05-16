@@ -10,26 +10,24 @@ val appName: String = "platops-example-frontend-microservice"
 
 lazy val microservice = Project(appName, file("."))
   .enablePlugins(Seq(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin, SbtArtifactory): _*)
-  .settings(scalaSettings: _*)
-  .settings(publishingSettings: _*)
-  .settings(defaultSettings(): _*)
-  .configs(IntegrationTest)
-  .settings(inConfig(IntegrationTest)(Defaults.itSettings): _*)
   .settings(
     majorVersion                                  := 2,
-    scalaVersion                                  := "2.11.11",
     libraryDependencies                           ++= compile ++ test,
     retrieveManaged                               := true,
     evictionWarningOptions in update              := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
     routesGenerator                               := StaticRoutesGenerator,
+    resolvers                                     += Resolver.jcenterRepo
+  )
+  .settings(publishingSettings: _*)
+  .configs(IntegrationTest)
+  .settings(inConfig(IntegrationTest)(Defaults.itSettings): _*)
+  .settings(
     Keys.fork in IntegrationTest                  := false,
     testGrouping in IntegrationTest               := oneForkedJvmPerTest((definedTests in IntegrationTest).value),
     parallelExecution in IntegrationTest          := false,
-    resolvers                                     += Resolver.bintrayRepo("hmrc", "releases"),
-    resolvers                                     += Resolver.jcenterRepo,
     unmanagedSourceDirectories in IntegrationTest := (baseDirectory in IntegrationTest)(base => Seq(base / "it")).value,
     addTestReportOption(IntegrationTest, "int-test-reports")
-  )
+)
 
 
 val compile = Seq(
@@ -40,10 +38,11 @@ val compile = Seq(
 
 val test  = Seq(
     "org.scalatest"          %% "scalatest"          % "3.0.0"              % "test",
-    "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.0"              % "test",
-    "org.pegdown"            %  "pegdown"            % "1.6.0"              % "test",
     "org.jsoup"              %  "jsoup"              % "1.10.2"             % "test",
-    "com.typesafe.play"      %% "play-test"          % PlayVersion.current  % "test"
+    "com.typesafe.play"      %% "play-test"          % PlayVersion.current  % "test",
+    "org.pegdown"            %  "pegdown"            % "1.6.0"              % "test, it",
+    "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.0"              % "test, it",
+    "uk.gov.hmrc"            %% "service-integration-test"    % "0.2.0"     % "test, it"
 )
 
 
