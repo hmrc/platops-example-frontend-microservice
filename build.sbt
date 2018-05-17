@@ -5,6 +5,7 @@ import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 import uk.gov.hmrc.versioning.SbtGitVersioning
 import uk.gov.hmrc.SbtArtifactory
 import uk.gov.hmrc.versioning.SbtGitVersioning.majorVersion
+import scoverage.ScoverageKeys
 
 val appName: String = "platops-example-frontend-microservice"
 
@@ -19,6 +20,7 @@ lazy val microservice = Project(appName, file("."))
     resolvers                                     += Resolver.jcenterRepo
   )
   .settings(publishingSettings: _*)
+  .settings(scoverageSettings: _*)
   .configs(IntegrationTest)
   .settings(inConfig(IntegrationTest)(Defaults.itSettings): _*)
   .settings(
@@ -29,6 +31,24 @@ lazy val microservice = Project(appName, file("."))
     addTestReportOption(IntegrationTest, "int-test-reports")
 )
 
+lazy val scoverageSettings = {
+  val excludedPackages = Seq(
+    ".*Routes.*",
+    ".*RoutesPrefix.*",
+    ".*Reverse.*",
+    "uk.gov.hmrc.BuildInfo.*",
+    "uk.gov.hmrc.*.views.html.*error_template.*",
+    "uk.gov.hmrc.*.views.html.*govuk_wrapper.*",
+    "uk.gov.hmrc.*.views.html.*main_template.*",
+    "com.kenshoo.play.metrics.*"
+  )
+  Seq(
+    ScoverageKeys.coverageExcludedPackages := excludedPackages.mkString(";"),
+    ScoverageKeys.coverageMinimum          := 80,
+    ScoverageKeys.coverageFailOnMinimum    := false,
+    ScoverageKeys.coverageHighlighting     := true
+  )
+}
 
 val compile = Seq(
     "uk.gov.hmrc" %% "govuk-template"     % "5.20.0",
