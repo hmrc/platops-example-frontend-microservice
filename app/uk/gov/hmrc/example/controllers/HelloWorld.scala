@@ -31,6 +31,8 @@ class HelloWorld @Inject()(val messagesApi: MessagesApi, implicit val appConfig:
     extends FrontendController
     with I18nSupport {
 
+  val SDD = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"
+
   val helloWorld = Action.async { implicit request =>
     Future.successful(Ok(views.html.hello_world()))
   }
