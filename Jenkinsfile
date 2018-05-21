@@ -11,7 +11,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                echo 'Triggering a test job'
+                build job: 'platops-example-library'
             }
         }
         stage('Deploy') {
