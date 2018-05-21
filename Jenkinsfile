@@ -6,12 +6,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building '
+                build job: 'platops-example-frontend-microservice'
             }
         }
-        stage('Test') {
+        stage('Build a library') {
             steps {
-                echo 'Triggering a test job'
+                echo 'Triggering another job'
                 build job: 'platops-example-library'
             }
         }
