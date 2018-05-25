@@ -24,6 +24,7 @@ import uk.gov.hmrc.play.config.ServicesConfig
 
 @Singleton
 class AppConfig @Inject()(val runModeConfiguration: Configuration, environment: Environment) extends ServicesConfig {
+
   override protected def mode: Mode = environment.mode
 
   private def loadConfig(key: String) =
