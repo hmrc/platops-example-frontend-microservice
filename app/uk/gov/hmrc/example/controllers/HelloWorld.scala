@@ -34,5 +34,4 @@ class HelloWorld @Inject()(val messagesApi: MessagesApi, implicit val appConfig:
   val helloWorld = Action.async { implicit request =>
     Future.successful(Ok(views.html.hello_world()))
   }
-
 }
