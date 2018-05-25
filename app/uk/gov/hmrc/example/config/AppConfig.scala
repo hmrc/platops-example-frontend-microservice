@@ -28,7 +28,9 @@ class AppConfig @Inject()(val runModeConfiguration: Configuration, environment: 
   override protected def mode: Mode = environment.mode
 
   private def loadConfig(key: String) =
-    runModeConfiguration.getString(key).getOrElse(throw new Exception(s"Missing configuration key: $key"))
+    runModeConfiguration
+      .getString(key)
+      .getOrElse(throw new Exception(s"Missing configuration key: $key"))
 
   private val contactHost                  = runModeConfiguration.getString(s"contact-frontend.host").getOrElse("")
   private val contactFormServiceIdentifier = "MyService"
