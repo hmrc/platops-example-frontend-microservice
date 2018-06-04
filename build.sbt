@@ -28,7 +28,10 @@ lazy val microservice = Project(appName, file("."))
     parallelExecution in IntegrationTest          := false,
     unmanagedSourceDirectories in IntegrationTest := (baseDirectory in IntegrationTest)(base => Seq(base / "it")).value,
     addTestReportOption(IntegrationTest, "int-test-reports")
-)
+  )
+  .settings(Node.tasks: _*)
+  .settings((test in Test) := ((test in Test) dependsOn Node.npmInstall).value)
+
 
 lazy val scoverageSettings = {
   val excludedPackages = Seq(
