@@ -1,20 +1,30 @@
 import sbt.{Def, _}
 
-// This is for testing only to check if we can work with npm / node
-object Node {
-  lazy val npmVersion = taskKey[Unit]("npm-version")
+import scala.util.Try
 
+/*
+ * This is for testing only to check if we can work with npm / node
+ */
+object Node {
+
+  lazy val npmVersion  = taskKey[Unit]("npm-version")
   lazy val nodeVersion = taskKey[Unit]("node-version")
+  private val logger   = ConsoleLogger()
 
   lazy val tasks: Seq[Def.Setting[Task[Unit]]] = {
-    import sys.process._
     Seq(
       npmVersion := {
-        println(s"Using npm version: ${"npm --version".!!}")
+        logger.info(s"Using npm version: ${versionOf("npm")}")
       },
       nodeVersion := {
-        println(s"Using node version: ${"node --version".!!}")
+        logger.info(s"Using node version: ${versionOf("node")}")
       }
     )
   }
+
+  private def versionOf(cmd: String): String = {
+    import sys.process._
+    Try(s"$cmd --version".!!).getOrElse("not installed")
+  }
+
 }
