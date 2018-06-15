@@ -1,7 +1,5 @@
 # platops-example-frontend-microservice
 
-[![Build Status](https://travis-ci.org/hmrc/platops-example-frontend-microservice.svg)](https://travis-ci.org/hmrc/platops-example-frontend-microservice) [ ![Download](https://api.bintray.com/packages/hmrc/releases/platops-example-frontend-microservice/images/download.svg) ](https://bintray.com/hmrc/releases/platops-example-frontend-microservice/_latestVersion)
-
 This is an exemplar of a frontend microservice. 
 
 ### License
