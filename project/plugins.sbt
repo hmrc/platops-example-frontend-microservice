@@ -16,7 +16,7 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.1")
 
 addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "1.8.0")
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-artifactory" % "0.3.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-artifactory" % "0.4.0")
 
 addSbtPlugin("uk.gov.hmrc" % "sbt-distributables" % "1.0.0")
 
