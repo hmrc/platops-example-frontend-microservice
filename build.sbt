@@ -1,4 +1,3 @@
-import sbt.Tests.{Group, SubProcess}
 import scoverage.ScoverageKeys
 import uk.gov.hmrc.DefaultBuildSettings.integrationTestSettings
 import uk.gov.hmrc.SbtArtifactory
@@ -41,8 +40,3 @@ lazy val scoverageSettings = {
     ScoverageKeys.coverageHighlighting     := true
   )
 }
-
-def oneForkedJvmPerTest(tests: Seq[TestDefinition]) =
-    tests map {
-        test => Group(test.name, Seq(test), SubProcess(ForkOptions(runJVMOptions = Seq("-Dtest.name=" + test.name))))
-    }
