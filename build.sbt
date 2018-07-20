@@ -4,7 +4,6 @@ import uk.gov.hmrc.DefaultBuildSettings.addTestReportOption
 import uk.gov.hmrc.SbtArtifactory
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 import uk.gov.hmrc.versioning.SbtGitVersioning
-import uk.gov.hmrc.versioning.SbtGitVersioning.majorVersion
 
 val appName: String = "platops-example-frontend-microservice"
 
