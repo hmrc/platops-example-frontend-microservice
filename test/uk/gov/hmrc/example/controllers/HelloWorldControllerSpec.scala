@@ -34,7 +34,7 @@ class HelloWorldControllerSpec extends WordSpec with Matchers with OneAppPerSuit
   val messageApi = new DefaultMessagesApi(env, configuration, new DefaultLangs(configuration))
   val appConfig  = new AppConfig(configuration, env)
 
-  val controller = new HelloWorld(messageApi, appConfig)
+  val controller = new HelloWorldController(messageApi, appConfig)
 
   "GET /" should {
     "return 200" in {

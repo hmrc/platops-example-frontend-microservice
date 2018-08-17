@@ -27,7 +27,7 @@ import uk.gov.hmrc.example.config.AppConfig
 import uk.gov.hmrc.example.views
 
 @Singleton
-class HelloWorld @Inject()(val messagesApi: MessagesApi, implicit val appConfig: AppConfig)
+class HelloWorldController @Inject()(val messagesApi: MessagesApi, implicit val appConfig: AppConfig)
     extends FrontendController
     with I18nSupport {
 
