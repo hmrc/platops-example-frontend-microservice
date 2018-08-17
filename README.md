@@ -35,16 +35,12 @@ An example can be found in uk.gov.hmrc.example.HelloWorldBrowserSpec, in the acc
 To run acceptance tests (docker needs to be running):
 
 
-1. Create the docker image
+1. Create and run the docker image
 ```
-cd acceptance-docer
+cd acceptance-docker
 docker build -t hmrc-digital-chrome-67 .
-```
-
-
-2. Run the image
-```
 docker run --rm -d --name chrome-docker -p 4444:4444 -p 5900:5900 -e PORT_MAPPINGS='6001->6001' -e TARGET_IP='host.docker.internal' hmrc-digital-chrome-67
+cd ..
 ```
 
 3. Run the acceptance tests
