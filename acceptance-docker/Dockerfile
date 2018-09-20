@@ -1,10 +1,10 @@
-FROM selenium/standalone-chrome-debug:3.12.0
+FROM selenium/standalone-chrome-debug:3.14.0
 
 USER root
 
 # Install apt packages
 RUN apt-get -y update
-RUN apt-get -y install socat
+RUN apt-get -y install rinetd
 RUN apt-get -y autoremove && \
   apt-get -y clean
 
