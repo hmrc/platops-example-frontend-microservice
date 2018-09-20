@@ -38,8 +38,8 @@ To run acceptance tests (docker needs to be running):
 1. Create and run the docker image
 ```
 cd acceptance-docker
-docker build -t hmrc-digital-chrome-67 .
-docker run --rm -d --name chrome-docker -p 4444:4444 -p 5900:5900 -e PORT_MAPPINGS='6001->6001' -e TARGET_IP='host.docker.internal' hmrc-digital-chrome-67
+docker build -t chrome-3.14.0 .
+docker run --rm -d --name chrome-docker -p 4444:4444 -p 5900:5900 -e PORT_MAPPINGS='6001->6001' -e TARGET_IP='host.docker.internal' chrome-3.14.0
 cd ..
 ```
 
