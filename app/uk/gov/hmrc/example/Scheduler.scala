@@ -40,22 +40,26 @@ class Scheduler @Inject()(
 
   implicit val hc: HeaderCarrier = HeaderCarrier()
 
-  def startScheduler(interval: FiniteDuration) = {
-    Logger.info(s"Starting scheduler every $interval")
-    val maxLatency = runModeConfiguration.getInt("max-latency-in-seconds").getOrElse(45)
-    actorSystem.scheduler.schedule(FiniteDuration(1, TimeUnit.SECONDS), interval) {
-      val i       = Random.nextInt(100)
-      val latency = if (i <= 75) 0 else Random.nextInt(maxLatency) + 1
-      val id      = UUID.randomUUID()
-      Logger.info(s"Starting a call with latency of $latency, id=$id")
-      httpClient
-        .GET[HttpResponse](s"${baseUrl("platops-example-private-backend-microservice")}/example/hello-world/$latency")
-        .onComplete {
-          case Success(response)  => Logger.info(s"Got a response for call id=$id")
-          case Failure(exception) => Logger.info(s"Failure getting response for call id=$id")
-        }
+  def startScheduler(interval: FiniteDuration): Unit =
+    if (runModeConfiguration.getBoolean("scheduler.enabled").getOrElse(false)) {
+      Logger.info(s"Starting scheduler every $interval")
+      val maxLatency = runModeConfiguration.getInt("max-latency-in-seconds").getOrElse(20)
+      actorSystem.scheduler.schedule(FiniteDuration(1, TimeUnit.SECONDS), interval) {
+        val i       = Random.nextInt(100)
+        val latency = if (i <= 75) 0 else Random.nextInt(maxLatency) + 1
+        val id      = UUID.randomUUID()
+        Logger.info(s"Starting a call with latency of $latency, id=$id")
+        httpClient
+          .GET[HttpResponse](s"${baseUrl("platops-example-private-backend-microservice")}/example/hello-world/$latency")
+          .onComplete {
+            case Success(response)  => Logger.info(s"Got a response for call id=$id")
+            case Failure(exception) => Logger.info(s"Failure getting response for call id=$id")
+          }
+      }
+      ()
+    } else {
+      ()
     }
-  }
 
   override protected def mode: Mode = environment.mode
 
