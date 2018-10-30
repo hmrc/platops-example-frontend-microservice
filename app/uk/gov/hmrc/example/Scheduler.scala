@@ -56,7 +56,7 @@ class Scheduler @Inject()(
             .onComplete {
               case Success(response) => Logger.info(s"Got a response for call id=$id")
               case Failure(exception) =>
-                Logger.info(s"Failure getting response for call id=$id: ${exception.getMessage}")
+                Logger.info(s"Failure getting response for call id=$id", exception)
             }
         }
       }
