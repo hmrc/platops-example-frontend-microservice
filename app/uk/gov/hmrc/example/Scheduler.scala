@@ -52,7 +52,8 @@ class Scheduler @Inject()(
           Logger.info(s"Starting a call with latency of $latency, id=$id")
           httpClient
             .GET[HttpResponse](
-              s"${baseUrl("platops-example-private-backend-microservice")}/example/hello-world/$latency")
+              s"${baseUrl("platops-example-private-backend-microservice")}/example/hello-world/$latency?requestId=$id"
+            )
             .onComplete {
               case Success(response) => Logger.info(s"Got a response for call id=$id")
               case Failure(exception) =>
