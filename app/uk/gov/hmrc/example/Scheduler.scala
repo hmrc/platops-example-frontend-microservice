@@ -45,7 +45,7 @@ class Scheduler @Inject()(
       Logger.info(s"Starting scheduler every $interval")
       val maxLatency = runModeConfiguration.getInt("max-latency-in-seconds").getOrElse(15)
       actorSystem.scheduler.schedule(FiniteDuration(1, TimeUnit.SECONDS), interval) {
-        (1 to 20).foreach { _ =>
+        (1 to 50).foreach { _ =>
           val freq    = Random.nextInt(100)
           val latency = if (freq <= 75) 0 else Random.nextInt(maxLatency)
           val id      = UUID.randomUUID()
