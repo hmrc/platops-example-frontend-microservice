@@ -5,7 +5,7 @@ object AppDependencies {
   val compile = Seq(
     "uk.gov.hmrc"       %% "govuk-template"    % "5.20.0",
     "uk.gov.hmrc"       %% "play-ui"           % "7.17.0",
-    "uk.gov.hmrc"       %% "bootstrap-play-25" % "3.7.0",
+    "uk.gov.hmrc"       %% "bootstrap-play-25" % "4.0.0",
     "com.typesafe.play" %% "play-ws"           % "2.5.19" force ()
   )
 
