@@ -12,8 +12,7 @@ lazy val microservice = Project(appName, file("."))
     majorVersion                                  := 2,
     libraryDependencies                           ++= AppDependencies.compile ++ AppDependencies.test,
     evictionWarningOptions in update              := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
-    routesGenerator                               := StaticRoutesGenerator,
-    dependencyOverrides += "com.typesafe.play" % "play_2.11" % "2.5.12"
+    routesGenerator                               := StaticRoutesGenerator
   )
   .settings(publishingSettings: _*)
   .settings(scoverageSettings: _*)
