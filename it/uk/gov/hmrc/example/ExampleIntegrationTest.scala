@@ -16,7 +16,7 @@ class ExampleIntegrationTest extends WordSpec with Matchers with ServiceSpec  {
 
       val wsClient = app.injector.instanceOf[WSClient]
 
-      val response = wsClient.url(resource("/example/hello-world")).get.futureValue
+      val response = wsClient.url(resource("/platops-example-frontend-microservice/hello-world")).get.futureValue
       response.status shouldBe 200
 
     }
