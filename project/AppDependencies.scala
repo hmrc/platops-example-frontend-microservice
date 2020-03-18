@@ -6,7 +6,8 @@ object AppDependencies {
     "uk.gov.hmrc"       %% "govuk-template"    % "5.28.0-play-25",
     "uk.gov.hmrc"       %% "play-ui"           % "7.32.0-play-25",
     "uk.gov.hmrc"       %% "bootstrap-play-25" % "4.9.0",
-    "com.typesafe.play" %% "play-ws"           % "2.5.19"
+    "com.typesafe.play" %% "play-ws"           % "2.5.19",
+    "uk.gov.hmrc"       %% "cookie-banner-play-25" % "0.2.0"
   )
 
   val test = Seq(
