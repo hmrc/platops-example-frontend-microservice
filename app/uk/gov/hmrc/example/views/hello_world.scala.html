@@ -15,8 +15,10 @@
  *@
 
 @import uk.gov.hmrc.example.config.AppConfig
-@()(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+@import uk.gov.hmrc.cookiebanner.CookieBanner
 
-@main_template(title = "Hello from platops-example-frontend-microservice", bodyClasses = None) {
+@(cookieBanner: CookieBanner)(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+
+@main_template(title = "Hello from platops-example-frontend-microservice", cookieBanner = cookieBanner, bodyClasses = None) {
     <h1>Hello from pipelined platops-example-frontend-microservice !</h1>
 }
