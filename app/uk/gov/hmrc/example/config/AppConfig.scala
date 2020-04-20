@@ -17,21 +17,17 @@
 package uk.gov.hmrc.example.config
 
 import javax.inject.{Inject, Singleton}
-import play.api.Mode.Mode
-import play.api.{Configuration, Environment}
-import uk.gov.hmrc.play.config.ServicesConfig
+import play.api.Configuration
 
 @Singleton
-class AppConfig @Inject()(val runModeConfiguration: Configuration, environment: Environment) extends ServicesConfig {
+class AppConfig @Inject()(val configuration: Configuration) {
 
-  override protected def mode: Mode = environment.mode
-
-  private def loadConfig(key: String) =
-    runModeConfiguration
-      .getString(key)
+  private def loadConfig(key: String): String =
+    configuration
+      .getOptional[String](key)
       .getOrElse(throw new Exception(s"Missing configuration key: $key"))
 
-  private val contactHost                  = runModeConfiguration.getString(s"contact-frontend.host").getOrElse("")
+  private val contactHost                  = configuration.getOptional[String](s"contact-frontend.host").getOrElse("")
   private val contactFormServiceIdentifier = "MyService"
 
   lazy val assetsPrefix: String     = loadConfig(s"assets.url") + loadConfig(s"assets.version")

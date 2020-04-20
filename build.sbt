@@ -11,8 +11,7 @@ lazy val microservice = Project(appName, file("."))
   .settings(
     majorVersion                                  := 2,
     libraryDependencies                           ++= AppDependencies.compile ++ AppDependencies.test,
-    evictionWarningOptions in update              := EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
-    routesGenerator                               := StaticRoutesGenerator
+    evictionWarningOptions in update              := EvictionWarningOptions.default.withWarnScalaVersionEviction(false)
   )
   .settings(publishingSettings: _*)
   .settings(scoverageSettings: _*)

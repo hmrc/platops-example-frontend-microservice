@@ -16,25 +16,27 @@
 
 package uk.gov.hmrc.example.controllers
 
+
 import org.scalatest.{Matchers, WordSpec}
-import org.scalatestplus.play.OneAppPerSuite
+import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.http.Status
-import play.api.i18n.{DefaultLangs, DefaultMessagesApi}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import play.api.{Configuration, Environment}
+import uk.gov.hmrc.cookiebanner.CookieBanner
 import uk.gov.hmrc.example.config.AppConfig
+import uk.gov.hmrc.play.bootstrap.http.HttpClient
+import uk.gov.hmrc.play.bootstrap.tools.Stubs.stubMessagesControllerComponents
 
-class HelloWorldControllerSpec extends WordSpec with Matchers with OneAppPerSuite {
-  val fakeRequest = FakeRequest("GET", "/")
-
-  val env           = Environment.simple()
-  val configuration = Configuration.load(env)
-
-  val messageApi = new DefaultMessagesApi(env, configuration, new DefaultLangs(configuration))
-  val appConfig  = new AppConfig(configuration, env)
-
-  val controller = new HelloWorldController(messageApi, appConfig)
+class HelloWorldControllerSpec extends WordSpec with Matchers with GuiceOneAppPerSuite {
+  private val fakeRequest = FakeRequest("GET", "/")
+  private val env = Environment.simple()
+  private val configuration = Configuration.load(env)
+  private val mcc = stubMessagesControllerComponents()
+  private val appConfig  = new AppConfig(configuration)
+  private val httpClient = app.injector.instanceOf[HttpClient]
+  private val cookieBanner = new CookieBanner(httpClient, configuration)
+  private val controller = new HelloWorldController(mcc, cookieBanner, appConfig)
 
   "GET /" should {
     "return 200" in {
