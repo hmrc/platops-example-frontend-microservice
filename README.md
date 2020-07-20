@@ -28,6 +28,7 @@ To run integration tests (smserver has to be running):
 sbt it:test
 ```
 
+
 ### Browser tests with docker
 
 An example can be found in uk.gov.hmrc.example.HelloWorldBrowserSpec, in the acceptance folder
