@@ -18,6 +18,7 @@ To run unit tests:
 sbt test
 ```
 
+
 ### Integration tests using smserver
 
 Check out how to use the new service-integration-test library in uk.gov.hmrc.example.ExampleIntegrationTest in the it folder
