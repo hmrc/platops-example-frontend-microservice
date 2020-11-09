@@ -16,6 +16,11 @@
 
 @import uk.gov.hmrc.example.config.AppConfig
 
+@this(
+        govUkWrapper: uk.gov.hmrc.example.views.html.GovUKWrapper,
+        uiSidebar:uk.gov.hmrc.play.views.html.layouts.Sidebar,
+        uiArticle:uk.gov.hmrc.play.views.html.layouts.Article
+)
 
 @(title: String,
   sidebarLinks: Option[Html] = None,
@@ -32,18 +37,18 @@
 
 @sidebar = {
     @if(sidebarLinks.isDefined) {
-        @layouts.sidebar(sidebarLinks.get, Some("sidebar"))
+        @uiSidebar(sidebarLinks.get, Some("sidebar"))
     }
 }
 
 
-@govuk_wrapper(appConfig = appConfig,
+@govUkWrapper(appConfig = appConfig,
                title = title,
                mainClass = mainClass,
                bodyClasses = bodyClasses,
                sidebar = sidebar,
                contentHeader = contentHeader,
-               mainContent = layouts.article(mainContent),
+               mainContent = uiArticle(mainContent),
                serviceInfoContent = serviceInfoContent,
                scriptElem = scriptElem
 )
