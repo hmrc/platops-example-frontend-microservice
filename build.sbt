@@ -1,14 +1,14 @@
 import scoverage.ScoverageKeys
 import uk.gov.hmrc.DefaultBuildSettings.{addTestReportOption, integrationTestSettings, oneForkedJvmPerTest}
-import uk.gov.hmrc.SbtArtifactory
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 import uk.gov.hmrc.versioning.SbtGitVersioning
 
 val appName: String = "platops-example-frontend-microservice"
 
 lazy val microservice = Project(appName, file("."))
-  .enablePlugins(Seq(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin, SbtArtifactory): _*)
+  .enablePlugins(Seq(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin): _*)
   .settings(
+    scalaVersion                                  := "2.12.11",
     majorVersion                                  := 2,
     libraryDependencies                           ++= AppDependencies.compile ++ AppDependencies.test,
     evictionWarningOptions in update              := EvictionWarningOptions.default.withWarnScalaVersionEviction(false)

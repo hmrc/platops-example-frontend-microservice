@@ -16,11 +16,10 @@
 
 @import play.twirl.api.HtmlFormat
 @import uk.gov.hmrc.example.config.AppConfig
-@import uk.gov.hmrc.cookiebanner.CookieBanner
+
 
 @(appConfig: AppConfig,
   title: String,
-  cookieBanner: CookieBanner,
   mainClass: Option[String] = None,
   mainDataAttributes: Option[Html] = None,
   bodyClasses: Option[String] = None,
@@ -39,7 +38,6 @@
       linkElem = None,
       headScripts = None)
     <meta name="format-detection" content="telephone=no" />
-    @cookieBanner.cookieBanner
 }
 
 @headerNavLinks = {}

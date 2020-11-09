@@ -18,7 +18,6 @@ package uk.gov.hmrc.example.controllers
 
 import javax.inject.{Inject, Singleton}
 import play.api.mvc._
-import uk.gov.hmrc.cookiebanner.CookieBanner
 import uk.gov.hmrc.example.config.AppConfig
 import uk.gov.hmrc.example.views
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
@@ -26,10 +25,10 @@ import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import scala.concurrent.Future
 
 @Singleton
-class HelloWorldController @Inject()(val mcc: MessagesControllerComponents, cookieBanner: CookieBanner, implicit val appConfig: AppConfig)
+class HelloWorldController @Inject()(template: views.html.hello_world, val mcc: MessagesControllerComponents, implicit val appConfig: AppConfig)
     extends FrontendController(mcc) {
 
   val helloWorld = Action.async { implicit request =>
-    Future.successful(Ok(views.html.hello_world(cookieBanner)))
+    Future.successful(Ok(template()))
   }
 }

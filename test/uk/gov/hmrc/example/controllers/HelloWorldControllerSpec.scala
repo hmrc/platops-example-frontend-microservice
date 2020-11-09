@@ -23,7 +23,6 @@ import play.api.http.Status
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import play.api.{Configuration, Environment}
-import uk.gov.hmrc.cookiebanner.CookieBanner
 import uk.gov.hmrc.example.config.AppConfig
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 import uk.gov.hmrc.play.bootstrap.tools.Stubs.stubMessagesControllerComponents
@@ -35,8 +34,7 @@ class HelloWorldControllerSpec extends WordSpec with Matchers with GuiceOneAppPe
   private val mcc = stubMessagesControllerComponents()
   private val appConfig  = new AppConfig(configuration)
   private val httpClient = app.injector.instanceOf[HttpClient]
-  private val cookieBanner = new CookieBanner(httpClient, configuration)
-  private val controller = new HelloWorldController(mcc, cookieBanner, appConfig)
+  private val controller = new HelloWorldController(mcc, appConfig)
 
   "GET /" should {
     "return 200" in {
