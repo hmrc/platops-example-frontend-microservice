@@ -1,18 +1,16 @@
 package uk.gov.hmrc.example
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpecLike
 import play.api.libs.ws.WSClient
 import uk.gov.hmrc.integration.ServiceSpec
 
-class ExampleIntegrationTest extends WordSpec with Matchers with ServiceSpec  {
+class ExampleIntegrationTest extends AnyWordSpecLike with Matchers with ServiceSpec  {
 
-  def externalServices: Seq[String] = Seq("datastream")
-
-  override def additionalConfig: Map[String, _] = Map("auditing.consumer.baseUri.port" -> externalServicePorts("datastream"))
-
+  def externalServices: Seq[String] = Seq()
 
   "This integration test" should {
-    "start datastream via smserver" in {
+    "connects to the hello-world page" in {
 
       val wsClient = app.injector.instanceOf[WSClient]
 

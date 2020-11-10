@@ -16,6 +16,6 @@ object AppDependencies {
     "org.jsoup"               % "jsoup"                               % "1.10.2"            % "test, it",
     "org.seleniumhq.selenium" % "selenium-java"                       % "2.53.1"            % "test, it",
     "org.seleniumhq.selenium" % "selenium-htmlunit-driver"            % "2.52.0"            % "test, it",
-    "uk.gov.hmrc"             %% "service-integration-test"           % "0.10.0-play-26"    % "test, it"
+    "uk.gov.hmrc"             %% "service-integration-test"           % "0.12.0-play-27"    % "test, it"
   )
 }
