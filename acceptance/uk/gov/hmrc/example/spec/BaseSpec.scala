@@ -25,14 +25,16 @@ import org.openqa.selenium.remote.{DesiredCapabilities, RemoteWebDriver}
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.scalatest._
 import org.scalatest.concurrent.ScalaFutures
-import org.scalatest.selenium.WebBrowser
+import org.scalatest.wordspec.AnyWordSpecLike
+import org.scalatestplus.selenium.WebBrowser
 import org.scalatestplus.play.guice.GuiceOneServerPerSuite
 import play.api.Application
 import play.api.inject.guice.GuiceApplicationBuilder
+import org.scalatest.matchers.should.Matchers
 
 import scala.util.{Properties, Try}
 
-trait BaseSpec extends WordSpec
+trait BaseSpec extends AnyWordSpecLike
   with GivenWhenThen
   with Matchers
   with WebBrowser
@@ -42,7 +44,7 @@ trait BaseSpec extends WordSpec
   with PageMatchers
   with GuiceOneServerPerSuite {
 
-  override lazy val port: Int = 6001
+  //override lazy val port: Int = 6001
   implicit override lazy val app: Application =  GuiceApplicationBuilder().build()
 
   implicit lazy val webDriver: WebDriver = {

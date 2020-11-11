@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.example.pages
 
-import org.scalatest.selenium.{Page, WebBrowser}
+import org.scalatestplus.selenium.{Page, WebBrowser}
 
 trait ExamplePage extends WebBrowser with Page {
   def title: String

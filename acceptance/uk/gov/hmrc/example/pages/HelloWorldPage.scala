@@ -20,6 +20,6 @@ object HelloWorldPage extends ExamplePage {
 
   override val title = "Hello from platops-example-frontend-microservice"
 
-  override val url: String = s"http://localhost:6001/platops-example-frontend-microservice/hello-world"
+  override val url: String = s"http://localhost:9930/platops-example-frontend-microservice/hello-world"
 
 }

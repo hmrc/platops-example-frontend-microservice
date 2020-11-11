@@ -18,7 +18,7 @@ package uk.gov.hmrc.example.spec
 
 import org.openqa.selenium.WebDriver
 import org.scalatest.matchers.{BeMatcher, MatchResult}
-import org.scalatest.selenium.WebBrowser
+import org.scalatestplus.selenium.WebBrowser
 import uk.gov.hmrc.example.pages
 
 trait PageMatchers {

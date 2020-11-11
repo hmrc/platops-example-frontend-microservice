@@ -21,6 +21,7 @@ lazy val microservice = Project(appName, file("."))
   .settings((test in Test) := ((test in Test) dependsOn (Node.npmVersion, Node.nodeVersion)).value)
   .configs(AcceptanceTest)
   .settings(inConfig(AcceptanceTest)(Defaults.testSettings): _*)
+  .settings(PlayKeys.playDefaultPort := 9930)
   .settings(
     unmanagedSourceDirectories in AcceptanceTest := Seq((baseDirectory in AcceptanceTest).value / "acceptance"),
     unmanagedResourceDirectories in AcceptanceTest := Seq((baseDirectory in AcceptanceTest).value / "acceptance",
