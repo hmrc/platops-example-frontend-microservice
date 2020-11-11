@@ -21,16 +21,18 @@ import uk.gov.hmrc.example.spec.BaseSpec
 
 class HelloWorldBrowserSpec extends BaseSpec {
 
+  val helloWorldPage = new HelloWorldPage(port)
+
   "HelloWorldBrowserSpec" should {
     "open the hello world page" in {
 
       println(port)
 
-      go to (page = HelloWorldPage)
+      go to (page = helloWorldPage)
 
-      val src = HelloWorldPage.pageSource
+      val src = helloWorldPage.pageSource
 
-      HelloWorldPage should be(displayed)
+      helloWorldPage should be(displayed)
 
     }
   }

@@ -16,10 +16,10 @@
 
 package uk.gov.hmrc.example.pages
 
-object HelloWorldPage extends ExamplePage {
+class HelloWorldPage(val port: Int) extends ExamplePage {
 
   override val title = "Hello from platops-example-frontend-microservice"
 
-  override val url: String = s"http://localhost:9930/platops-example-frontend-microservice/hello-world"
+  override val url: String = s"http://localhost:${port}/platops-example-frontend-microservice/hello-world"
 
 }
