@@ -1,5 +1,5 @@
 import scoverage.ScoverageKeys
-import uk.gov.hmrc.DefaultBuildSettings.{addTestReportOption, integrationTestSettings, oneForkedJvmPerTest}
+import uk.gov.hmrc.DefaultBuildSettings.{integrationTestSettings, oneForkedJvmPerTest}
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
 import uk.gov.hmrc.versioning.SbtGitVersioning
 
@@ -19,19 +19,7 @@ lazy val microservice = Project(appName, file("."))
   .settings(integrationTestSettings(): _*)
   .settings(Node.tasks: _*)
   .settings((test in Test) := ((test in Test) dependsOn (Node.npmVersion, Node.nodeVersion)).value)
-  .configs(AcceptanceTest)
-  .settings(inConfig(AcceptanceTest)(Defaults.testSettings): _*)
   .settings(PlayKeys.playDefaultPort := 9930)
-  .settings(
-    unmanagedSourceDirectories in AcceptanceTest := Seq((baseDirectory in AcceptanceTest).value / "acceptance"),
-    unmanagedResourceDirectories in AcceptanceTest := Seq((baseDirectory in AcceptanceTest).value / "acceptance",
-      (baseDirectory in AcceptanceTest).value / "target/web/public/test"),
-    Keys.fork in AcceptanceTest := false,
-    parallelExecution in AcceptanceTest := false,
-    addTestReportOption(AcceptanceTest, "acceptance-test-reports")
-  )
-
-lazy val AcceptanceTest = config("acceptance") extend Test
 
 lazy val scoverageSettings = {
   val excludedPackages = Seq(

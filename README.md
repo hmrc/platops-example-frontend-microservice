@@ -28,25 +28,6 @@ To run integration tests (smserver has to be running):
 sbt it:test
 ```
 
-### Browser tests with docker
-
-An example can be found in uk.gov.hmrc.example.HelloWorldBrowserSpec, in the acceptance folder
-
-To run acceptance tests (docker needs to be running):
-
-
-1. Create and run the docker image
-```
-cd acceptance-docker
-docker build -t hmrc-digital-chrome-67 .
-docker run --rm -d --name chrome-docker -p 4444:4444 -p 5900:5900 -e PORT_MAPPINGS='6001->6001' -e TARGET_IP='host.docker.internal' hmrc-digital-chrome-67
-cd ..
-```
-
-3. Run the acceptance tests
-```
-sbt -Dbrowser=remote-chrome acceptance:test
-```
 
 ### License
 
