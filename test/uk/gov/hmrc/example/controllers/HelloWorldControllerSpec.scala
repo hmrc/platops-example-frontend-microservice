@@ -17,26 +17,25 @@
 package uk.gov.hmrc.example.controllers
 
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpecLike
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.http.Status
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import play.api.{Configuration, Environment}
-import uk.gov.hmrc.cookiebanner.CookieBanner
 import uk.gov.hmrc.example.config.AppConfig
-import uk.gov.hmrc.play.bootstrap.http.HttpClient
-import uk.gov.hmrc.play.bootstrap.tools.Stubs.stubMessagesControllerComponents
+import uk.gov.hmrc.example.views.html.HelloWorldView
 
-class HelloWorldControllerSpec extends WordSpec with Matchers with GuiceOneAppPerSuite {
+
+class HelloWorldControllerSpec extends AnyWordSpecLike with Matchers with GuiceOneAppPerSuite {
   private val fakeRequest = FakeRequest("GET", "/")
   private val env = Environment.simple()
   private val configuration = Configuration.load(env)
   private val mcc = stubMessagesControllerComponents()
   private val appConfig  = new AppConfig(configuration)
-  private val httpClient = app.injector.instanceOf[HttpClient]
-  private val cookieBanner = new CookieBanner(httpClient, configuration)
-  private val controller = new HelloWorldController(mcc, cookieBanner, appConfig)
+  private val template = app.injector.instanceOf[HelloWorldView]
+  private val controller = new HelloWorldController(template, mcc, appConfig)
 
   "GET /" should {
     "return 200" in {

@@ -15,15 +15,20 @@
  *@
 
 @import uk.gov.hmrc.example.config.AppConfig
-@import uk.gov.hmrc.cookiebanner.CookieBanner
+
+@this(
+        govUkWrapper: uk.gov.hmrc.example.views.html.GovUKWrapper,
+        uiSidebar:uk.gov.hmrc.play.views.html.layouts.Sidebar,
+        uiArticle:uk.gov.hmrc.play.views.html.layouts.Article
+)
 
 @(title: String,
   sidebarLinks: Option[Html] = None,
   contentHeader: Option[Html] = None,
   bodyClasses: Option[String] = None,
   mainClass: Option[String] = None,
-  scriptElem: Option[Html] = None,
-  cookieBanner: CookieBanner)(mainContent: Html)(implicit request : Request[_], messages: Messages, appConfig: AppConfig)
+  scriptElem: Option[Html] = None
+  )(mainContent: Html)(implicit request : Request[_], messages: Messages, appConfig: AppConfig)
 
 @import uk.gov.hmrc.play.views.html.layouts
 
@@ -32,19 +37,18 @@
 
 @sidebar = {
     @if(sidebarLinks.isDefined) {
-        @layouts.sidebar(sidebarLinks.get, Some("sidebar"))
+        @uiSidebar(sidebarLinks.get, Some("sidebar"))
     }
 }
 
 
-@govuk_wrapper(appConfig = appConfig,
+@govUkWrapper(appConfig = appConfig,
                title = title,
-               cookieBanner = cookieBanner,
                mainClass = mainClass,
                bodyClasses = bodyClasses,
                sidebar = sidebar,
                contentHeader = contentHeader,
-               mainContent = layouts.article(mainContent),
+               mainContent = uiArticle(mainContent),
                serviceInfoContent = serviceInfoContent,
                scriptElem = scriptElem
 )
