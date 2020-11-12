@@ -31,6 +31,7 @@ import org.scalatestplus.play.guice.GuiceOneServerPerSuite
 import play.api.Application
 import play.api.inject.guice.GuiceApplicationBuilder
 import org.scalatest.matchers.should.Matchers
+import org.scalatestplus.play.PortNumber
 
 import scala.util.{Properties, Try}
 
@@ -44,7 +45,8 @@ trait BaseSpec extends AnyWordSpecLike
   with PageMatchers
   with GuiceOneServerPerSuite {
 
-  //override lazy val port: Int = 6001
+  override implicit def portNumber: PortNumber = PortNumber(6001)
+
   implicit override lazy val app: Application =  GuiceApplicationBuilder().build()
 
   implicit lazy val webDriver: WebDriver = {
@@ -55,7 +57,7 @@ trait BaseSpec extends AnyWordSpecLike
       case "chrome" =>
         new ChromeDriver()
       case "remote-chrome" =>
-        new RemoteWebDriver(new URL(s"http://localhost:4444/wd/hub"), DesiredCapabilities.chrome)
+        new RemoteWebDriver(new URL(s"http://localhost:4444/wd/hub"), new ChromeOptions())
       case "remote-firefox" =>
         new RemoteWebDriver(new URL(s"http://localhost:4444/wd/hub"), DesiredCapabilities.firefox)
       case other => fail(s"Browser '$other' not recognised")
