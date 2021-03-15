@@ -18,21 +18,18 @@ package uk.gov.hmrc.example.config
 
 import javax.inject.{Inject, Singleton}
 import play.api.Configuration
+import play.api.i18n.Lang
+import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
 @Singleton
-class AppConfig @Inject()(val configuration: Configuration) {
+class AppConfig @Inject()(
+  configuration : Configuration,
+  servicesConfig: ServicesConfig
+) {
+  val welshLanguageSupportEnabled: Boolean =
+    configuration.getOptional[Boolean]("features.welsh-language-support").getOrElse(false)
 
-  private def loadConfig(key: String): String =
-    configuration
-      .getOptional[String](key)
-      .getOrElse(throw new Exception(s"Missing configuration key: $key"))
-
-  private val contactHost                  = configuration.getOptional[String](s"contact-frontend.host").getOrElse("")
-  private val contactFormServiceIdentifier = "MyService"
-
-  lazy val assetsPrefix: String     = loadConfig(s"assets.url") + loadConfig(s"assets.version")
-  lazy val analyticsToken: String   = loadConfig(s"google-analytics.token")
-  lazy val analyticsHost: String    = loadConfig(s"google-analytics.host")
-  lazy val reportAProblemPartialUrl = s"$contactHost/contact/problem_reports_ajax?service=$contactFormServiceIdentifier"
-  lazy val reportAProblemNonJSUrl   = s"$contactHost/contact/problem_reports_nonjs?service=$contactFormServiceIdentifier"
+  val en: String            = "en"
+  val cy: String            = "cy"
+  val defaultLanguage: Lang = Lang(en)
 }

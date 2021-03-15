@@ -23,19 +23,17 @@ import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.http.Status
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import play.api.{Configuration, Environment}
 import uk.gov.hmrc.example.config.AppConfig
-import uk.gov.hmrc.example.views.html.HelloWorldView
+import uk.gov.hmrc.example.views.html.HelloWorldPage
 
 
 class HelloWorldControllerSpec extends AnyWordSpecLike with Matchers with GuiceOneAppPerSuite {
+  private val mcc            = stubMessagesControllerComponents()
+  private val appConfig      = app.injector.instanceOf[AppConfig]
+  private val helloWorldPage = app.injector.instanceOf[HelloWorldPage]
+  private val controller     = new HelloWorldController(appConfig, mcc, helloWorldPage)
+
   private val fakeRequest = FakeRequest("GET", "/")
-  private val env = Environment.simple()
-  private val configuration = Configuration.load(env)
-  private val mcc = stubMessagesControllerComponents()
-  private val appConfig  = new AppConfig(configuration)
-  private val template = app.injector.instanceOf[HelloWorldView]
-  private val controller = new HelloWorldController(template, mcc, appConfig)
 
   "GET /" should {
     "return 200" in {
@@ -48,6 +46,5 @@ class HelloWorldControllerSpec extends AnyWordSpecLike with Matchers with GuiceO
       contentType(result) shouldBe Some("text/html")
       charset(result)     shouldBe Some("utf-8")
     }
-
   }
 }

@@ -14,23 +14,11 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.example.config.AppConfig
-@import uk.gov.hmrc.govukfrontend.views.html.components.Text
+@this()
 
-@this(
-  layout   : Layout,
-  appConfig: AppConfig
-)
+@(headBlock: Option[Html] = None)
 
-@(pageTitle: String,
-  heading: String,
-  message: String
-)(implicit
-  request: Request[_],
-  messages: Messages
-)
-
-@layout(pageTitle = Some(pageTitle)) {
-  <h1 class="govuk-heading-xl">@{Text(heading).asHtml}</h1>
-  <p class="govuk-body">@{Text(message).asHtml}</p>
-}
+@headBlock
+<!--[if lte IE 8]><script src='@controllers.routes.Assets.versioned("javascripts/html5shiv.min.js")'></script><![endif]-->
+<!--[if lte IE 8]><link href='@controllers.routes.Assets.versioned("stylesheets/application-ie-8.css")' rel="stylesheet" type="text/css" /><![endif]-->
+<!--[if gt IE 8]><!--><link href='@controllers.routes.Assets.versioned("stylesheets/application.css")' media="all" rel="stylesheet" type="text/css" /><!--<![endif]-->

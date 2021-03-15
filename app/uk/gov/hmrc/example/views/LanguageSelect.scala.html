@@ -15,22 +15,19 @@
  *@
 
 @import uk.gov.hmrc.example.config.AppConfig
-@import uk.gov.hmrc.govukfrontend.views.html.components.Text
+@import uk.gov.hmrc.example.controllers.routes.LanguageSwitchController.switchToLanguage
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.HmrcLanguageSelect
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.language.{LanguageSelect => LS, Cy, En}
 
 @this(
-  layout   : Layout,
-  appConfig: AppConfig
+  hmrcLanguageSelect: HmrcLanguageSelect,
+  appConfig         : AppConfig
 )
 
-@(pageTitle: String,
-  heading: String,
-  message: String
-)(implicit
-  request: Request[_],
-  messages: Messages
-)
+@()(implicit messages: Messages)
 
-@layout(pageTitle = Some(pageTitle)) {
-  <h1 class="govuk-heading-xl">@{Text(heading).asHtml}</h1>
-  <p class="govuk-body">@{Text(message).asHtml}</p>
-}
+@hmrcLanguageSelect(LS(
+  if (messages.lang.code == "cy") Cy else En,
+  (En, switchToLanguage("en").url),
+  (Cy, switchToLanguage("cy").url)
+))

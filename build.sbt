@@ -1,36 +1,42 @@
 import scoverage.ScoverageKeys
-import uk.gov.hmrc.DefaultBuildSettings.{integrationTestSettings, oneForkedJvmPerTest}
+import uk.gov.hmrc.DefaultBuildSettings
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
-import uk.gov.hmrc.versioning.SbtGitVersioning
 
-val appName: String = "platops-example-frontend-microservice"
+val silencerVersion = "1.7.1"
 
-lazy val microservice = Project(appName, file("."))
-  .enablePlugins(Seq(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin): _*)
+lazy val microservice = Project("platops-example-frontend-microservice", file("."))
+  .enablePlugins(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin)
   .settings(
-    scalaVersion                                  := "2.12.11",
-    majorVersion                                  := 2,
-    libraryDependencies                           ++= AppDependencies.compile ++ AppDependencies.test,
-    evictionWarningOptions in update              := EvictionWarningOptions.default.withWarnScalaVersionEviction(false)
+    scalaVersion        := "2.12.11",
+    majorVersion        := 2,
+    libraryDependencies ++= AppDependencies.compile ++ AppDependencies.test
   )
   .settings(publishingSettings: _*)
   .settings(scoverageSettings: _*)
   .configs(IntegrationTest)
-  .settings(integrationTestSettings(): _*)
+  .settings(DefaultBuildSettings.integrationTestSettings(): _*)
   .settings(Node.tasks: _*)
-  .settings((test in Test) := ((test in Test) dependsOn (Node.npmVersion, Node.nodeVersion)).value)
+  .settings(Test / test := ((Test / test) dependsOn (Node.npmVersion, Node.nodeVersion)).value)
   .settings(PlayKeys.playDefaultPort := 9930)
+  .settings(
+    // Use the silencer plugin to suppress warnings
+    // You may turn it on for `views` too to suppress warnings from unused imports in compiled twirl templates, but this will hide other warnings.
+    scalacOptions += "-P:silencer:pathFilters=routes;views",
+    libraryDependencies ++= Seq(
+      compilerPlugin("com.github.ghik" % "silencer-plugin" % silencerVersion cross CrossVersion.full),
+      "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full
+    )
+  )
 
 lazy val scoverageSettings = {
   val excludedPackages = Seq(
     ".*Routes.*",
     ".*RoutesPrefix.*",
     ".*Reverse.*",
-    "uk.gov.hmrc.BuildInfo.*",
-    "uk.gov.hmrc.*.views.html.*error_template.*",
-    "uk.gov.hmrc.*.views.html.*govuk_wrapper.*",
-    "uk.gov.hmrc.*.views.html.*main_template.*",
-    "com.kenshoo.play.metrics.*"
+    "uk.gov.hmrc.example.config.ErrorHandler",
+    "uk.gov.hmrc.example.views.html.LanguageSelect",
+    "uk.gov.hmrc.example.views.html.ErrorTemplate",
+    "uk.gov.hmrc.example.controllers.LanguageSwitchController",
   )
   Seq(
     ScoverageKeys.coverageExcludedPackages := excludedPackages.mkString(";"),

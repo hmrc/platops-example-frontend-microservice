@@ -7,8 +7,10 @@ import scala.util.Try
  */
 object Node {
 
-  lazy val npmVersion  = taskKey[Unit]("npm-version")
-  lazy val nodeVersion = taskKey[Unit]("node-version")
+  lazy val npmVersion  = taskKey[Unit]("npmVersion")
+
+  lazy val nodeVersion = taskKey[Unit]("nodeVersion")
+
   private val logger   = ConsoleLogger()
 
   lazy val tasks: Seq[Def.Setting[Task[Unit]]] = {
