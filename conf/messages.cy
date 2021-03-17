@@ -1,3 +1,3 @@
 service.name = platops-example-frontend-microservice
 service.homePageUrl = /platops-example-frontend-microservice
-service.text = This is your new service
+service.text = Dyma'ch gwasanaeth newydd

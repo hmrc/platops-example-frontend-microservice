@@ -17,24 +17,23 @@
 package uk.gov.hmrc.example.controllers
 
 import javax.inject.{Inject, Singleton}
-import play.api.mvc._
 import uk.gov.hmrc.example.config.AppConfig
-import uk.gov.hmrc.example.views.html.HelloWorldPage
-import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-
-import scala.concurrent.Future
+import uk.gov.hmrc.play.language.{LanguageController, LanguageUtils}
+import play.api.i18n.Lang
+import play.api.mvc.ControllerComponents
 
 @Singleton
-class HelloWorldController @Inject()(
-  appConfig     : AppConfig,
-  mcc           : MessagesControllerComponents,
-  helloWorldPage: HelloWorldPage
-) extends FrontendController(mcc) {
+class LanguageSwitchController @Inject()(
+  appConfig    : AppConfig,
+  languageUtils: LanguageUtils,
+  cc           : ControllerComponents
+) extends LanguageController(languageUtils, cc) {
+  import appConfig.{en, cy}
 
-  implicit val config: AppConfig = appConfig
+  override def fallbackURL: String =
+    "https://www.gov.uk/government/organisations/hm-revenue-customs"
 
-  val helloWorld: Action[AnyContent] =
-    Action.async { implicit request =>
-      Future.successful(Ok(helloWorldPage()))
-    }
+  override protected def languageMap: Map[String, Lang] =
+    Map(en -> Lang(en)) ++
+      (if (appConfig.welshLanguageSupportEnabled) Map(cy -> Lang(cy)) else Map.empty)
 }

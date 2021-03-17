@@ -16,11 +16,17 @@
 
 @import uk.gov.hmrc.example.config.AppConfig
 
-@this(mainTemplate: uk.gov.hmrc.example.views.html.MainTemplate)
+@this(
+  layout   : Layout,
+  appConfig: AppConfig
+)
 
-@()(implicit request: Request[_], messages: Messages, appConfig: AppConfig)
+@()(implicit
+  request : Request[_],
+  messages: Messages
+)
 
-
-@mainTemplate(title = "Hello from platops-example-frontend-microservice", bodyClasses = None) {
-    <h1>Hello from pipelined platops-example-frontend-microservice !</h1>
+@layout(pageTitle = Some("platops-example-frontend-microservice")) {
+  <h1 class="govuk-heading-xl">Hello from platops-example-frontend-microservice</h1>
+  <p class="govuk-body">Hello from pipelined platops-example-frontend-microservice!</p>
 }
