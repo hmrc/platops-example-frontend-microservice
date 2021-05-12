@@ -1,17 +1,17 @@
 import scoverage.ScoverageKeys
 import uk.gov.hmrc.DefaultBuildSettings
-import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin.publishingSettings
+import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 
 val silencerVersion = "1.7.1"
 
 lazy val microservice = Project("platops-example-frontend-microservice", file("."))
-  .enablePlugins(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin)
+  .enablePlugins(play.sbt.PlayScala, SbtDistributablesPlugin)
   .settings(
     scalaVersion        := "2.12.11",
     majorVersion        := 2,
     libraryDependencies ++= AppDependencies.compile ++ AppDependencies.test
   )
-  .settings(publishingSettings: _*)
+  .settings(SbtDistributablesPlugin.publishingSettings: _*)
   .settings(scoverageSettings: _*)
   .configs(IntegrationTest)
   .settings(DefaultBuildSettings.integrationTestSettings(): _*)
