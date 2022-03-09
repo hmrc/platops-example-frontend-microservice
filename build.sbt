@@ -2,12 +2,12 @@ import scoverage.ScoverageKeys
 import uk.gov.hmrc.DefaultBuildSettings
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 
-val silencerVersion = "1.7.1"
+val silencerVersion = "1.7.7"
 
 lazy val microservice = Project("platops-example-frontend-microservice", file("."))
   .enablePlugins(play.sbt.PlayScala, SbtDistributablesPlugin)
   .settings(
-    scalaVersion        := "2.12.11",
+    scalaVersion        := "2.12.15",
     majorVersion        := 2,
     libraryDependencies ++= AppDependencies.compile ++ AppDependencies.test
   )
