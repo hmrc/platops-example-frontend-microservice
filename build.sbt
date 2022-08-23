@@ -19,6 +19,7 @@ lazy val microservice = Project("platops-example-frontend-microservice", file(".
   .settings(Test / test := ((Test / test) dependsOn (Node.npmVersion, Node.nodeVersion)).value)
   .settings(PlayKeys.playDefaultPort := 9930)
   .settings(
+    logBuffered := false,
     // Use the silencer plugin to suppress warnings
     // You may turn it on for `views` too to suppress warnings from unused imports in compiled twirl templates, but this will hide other warnings.
     scalacOptions += "-P:silencer:pathFilters=routes;views",
