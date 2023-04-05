@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,23 +16,34 @@
 
 package uk.gov.hmrc.example
 
+import org.scalatest.concurrent.{ScalaFutures, IntegrationPatience}
 import org.scalatest.matchers.should.Matchers
-import org.scalatest.wordspec.AnyWordSpecLike
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatestplus.play.guice.GuiceOneServerPerSuite
+import play.api.Application
+import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.libs.ws.WSClient
-import uk.gov.hmrc.integration.ServiceSpec
 
-class ExampleIntegrationTest extends AnyWordSpecLike with Matchers with ServiceSpec  {
+class ExampleIntegrationTest
+  extends AnyWordSpec
+     with Matchers
+     with ScalaFutures
+     with IntegrationPatience
+     with GuiceOneServerPerSuite {
 
-  def externalServices: Seq[String] = Seq()
+  override def fakeApplication(): Application =
+    GuiceApplicationBuilder()
+      .build()
+
+  val wsClient = app.injector.instanceOf[WSClient]
 
   "This integration test" should {
     "connects to the hello-world page" in {
-
-      val wsClient = app.injector.instanceOf[WSClient]
-
-      val response = wsClient.url(resource("/platops-example-frontend-microservice/hello-world")).get.futureValue
+      val response = wsClient.url(resource("platops-example-frontend-microservice/hello-world")).get().futureValue
       response.status shouldBe 200
-
     }
   }
+
+  def resource(path: String): String =
+    s"http://localhost:$port/$path"
 }
