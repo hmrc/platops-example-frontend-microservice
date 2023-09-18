@@ -23,7 +23,6 @@ lazy val it =
   (project in file("it"))
     .enablePlugins(PlayScala)
     .settings(commonSettings)
-    .settings(libraryDependencies ++= AppDependencies.it)
     .dependsOn(microservice % "test->test")
 
 lazy val scoverageSettings = {

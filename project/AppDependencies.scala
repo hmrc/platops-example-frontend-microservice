@@ -14,8 +14,4 @@ object AppDependencies {
     "uk.gov.hmrc"      %% "bootstrap-test-play-28"           % bootstrapVersion    % Test,
     "org.jsoup"        %  "jsoup"                            % "1.13.1"            % Test
   )
-
-  val it = Seq(
-    "uk.gov.hmrc"      %% "webdriver-factory"                % "0.37.0"            % Test // Expect Bobby error
-  )
 }
