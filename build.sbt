@@ -20,7 +20,7 @@ lazy val microservice = Project("platops-example-frontend-microservice", file(".
 lazy val it = project
   .enablePlugins(PlayScala)
   .dependsOn(microservice % "test->test")
-  .settings(DefaultBuildSettings.itSettings)
+  .settings(DefaultBuildSettings.itSettings())
   .settings(libraryDependencies ++= AppDependencies.it)
 
 lazy val scoverageSettings = {
