@@ -35,6 +35,7 @@ class HelloWorldController @Inject()(
 
   val helloWorld: Action[AnyContent] =
     Action.async { implicit request =>
+      println("hello")
       Future.successful(Ok(helloWorldPage()))
     }
 }
