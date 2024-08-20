@@ -1,4 +1,4 @@
-import sbt.{Def, _}
+import sbt.{Def, *}
 
 import scala.util.Try
 

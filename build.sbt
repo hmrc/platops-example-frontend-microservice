@@ -3,7 +3,7 @@ import uk.gov.hmrc.DefaultBuildSettings
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 
 ThisBuild / majorVersion := 2
-ThisBuild / scalaVersion := "2.13.12"
+ThisBuild / scalaVersion := "3.3.3"
 
 lazy val microservice = Project("platops-example-frontend-microservice", file("."))
   .enablePlugins(play.sbt.PlayScala, SbtDistributablesPlugin)
