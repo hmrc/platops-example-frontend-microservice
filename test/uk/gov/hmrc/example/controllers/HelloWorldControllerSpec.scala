@@ -23,7 +23,6 @@ import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.http.Status
 import play.api.test.FakeRequest
 import play.api.test.Helpers.*
-import uk.gov.hmrc.example.config.AppConfig
 import uk.gov.hmrc.example.views.html.HelloWorldPage
 
 
@@ -33,9 +32,8 @@ class HelloWorldControllerSpec
     with GuiceOneAppPerSuite:
 
   private val mcc            = stubMessagesControllerComponents()
-  private val appConfig      = app.injector.instanceOf[AppConfig]
   private val helloWorldPage = app.injector.instanceOf[HelloWorldPage]
-  private val controller     = HelloWorldController(appConfig, mcc, helloWorldPage)
+  private val controller     = HelloWorldController(mcc, helloWorldPage)
 
   private val fakeRequest = FakeRequest("GET", "/")
 

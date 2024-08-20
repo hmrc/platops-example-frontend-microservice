@@ -28,15 +28,12 @@ import scala.concurrent.Future
 
 @Singleton
 class HelloWorldController @Inject()(
-  appConfig     : AppConfig,
   mcc           : MessagesControllerComponents,
   helloWorldPage: HelloWorldPage
 ) extends FrontendController(mcc):
 
-  given AppConfig = appConfig
-
   val helloWorld: Action[AnyContent] = Action.async:
    request =>
     given RequestHeader = request
-    given Messages      = messagesApi.preferred(request)
+    given Messages      = request.messages
     Future.successful(Ok(helloWorldPage()))
