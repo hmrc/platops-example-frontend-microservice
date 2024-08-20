@@ -14,15 +14,12 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.example.config.AppConfig
-
 @this(
-  layout   : Layout,
-  appConfig: AppConfig
+  layout   : Layout
 )
 
 @()(implicit
-  request : Request[_],
+  request : RequestHeader,
   messages: Messages
 )
 

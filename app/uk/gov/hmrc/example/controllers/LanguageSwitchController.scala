@@ -27,7 +27,7 @@ class LanguageSwitchController @Inject()(
   appConfig    : AppConfig,
   languageUtils: LanguageUtils,
   cc           : ControllerComponents
-) extends LanguageController(languageUtils, cc) {
+) extends LanguageController(languageUtils, cc):
   import appConfig.{en, cy}
 
   override def fallbackURL: String =
@@ -36,4 +36,3 @@ class LanguageSwitchController @Inject()(
   override protected def languageMap: Map[String, Lang] =
     Map(en -> Lang(en)) ++
       (if (appConfig.welshLanguageSupportEnabled) Map(cy -> Lang(cy)) else Map.empty)
-}

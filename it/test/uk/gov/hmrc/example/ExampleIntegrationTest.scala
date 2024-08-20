@@ -29,7 +29,7 @@ class ExampleIntegrationTest
      with Matchers
      with ScalaFutures
      with IntegrationPatience
-     with GuiceOneServerPerSuite {
+     with GuiceOneServerPerSuite:
 
   override def fakeApplication(): Application =
     GuiceApplicationBuilder()
@@ -37,13 +37,11 @@ class ExampleIntegrationTest
 
   val wsClient = app.injector.instanceOf[WSClient]
 
-  "This integration test" should {
-    "connects to the hello-world page" in {
+  "This integration test" should:
+    "connects to the hello-world page" in:
       val response = wsClient.url(resource("platops-example-frontend-microservice/hello-world")).get().futureValue
       response.status shouldBe 200
-    }
-  }
 
   def resource(path: String): String =
     s"http://localhost:$port/$path"
-}
+

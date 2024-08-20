@@ -22,29 +22,27 @@ import org.scalatest.wordspec.AnyWordSpecLike
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.http.Status
 import play.api.test.FakeRequest
-import play.api.test.Helpers._
-import uk.gov.hmrc.example.config.AppConfig
+import play.api.test.Helpers.*
 import uk.gov.hmrc.example.views.html.HelloWorldPage
 
 
-class HelloWorldControllerSpec extends AnyWordSpecLike with Matchers with GuiceOneAppPerSuite {
+class HelloWorldControllerSpec
+  extends AnyWordSpecLike
+    with Matchers
+    with GuiceOneAppPerSuite:
+
   private val mcc            = stubMessagesControllerComponents()
-  private val appConfig      = app.injector.instanceOf[AppConfig]
   private val helloWorldPage = app.injector.instanceOf[HelloWorldPage]
-  private val controller     = new HelloWorldController(appConfig, mcc, helloWorldPage)
+  private val controller     = HelloWorldController(mcc, helloWorldPage)
 
   private val fakeRequest = FakeRequest("GET", "/")
 
-  "GET /" should {
-    "return 200" in {
+  "GET /" should:
+    "return 200" in:
       val result = controller.helloWorld(fakeRequest)
       status(result) shouldBe Status.OK
-    }
 
-    "return HTML" in {
+    "return HTML" in:
       val result = controller.helloWorld(fakeRequest)
       contentType(result) shouldBe Some("text/html")
       charset(result)     shouldBe Some("utf-8")
-    }
-  }
-}
