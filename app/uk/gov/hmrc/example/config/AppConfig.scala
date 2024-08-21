@@ -18,7 +18,6 @@ package uk.gov.hmrc.example.config
 
 import javax.inject.{Inject, Singleton}
 import play.api.Configuration
-import play.api.i18n.Lang
 
 @Singleton
 class AppConfig @Inject()(
@@ -26,7 +25,3 @@ class AppConfig @Inject()(
 ):
   val welshLanguageSupportEnabled: Boolean =
     configuration.getOptional[Boolean]("features.welsh-language-support").getOrElse(false)
-
-  val en: String            = "en"
-  val cy: String            = "cy"
-  val defaultLanguage: Lang = Lang(en)
