@@ -14,38 +14,20 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.example.config.AppConfig
-@import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.hmrcfrontend.views.html.helpers._
+ @import uk.gov.hmrc.example.config.AppConfig
+ @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
+ @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.HmrcStandardPageParams
 
+ @this(
+   appConfig: AppConfig,
+   hmrcStandardPage: HmrcStandardPage
+ )
 
-@this(
-  govukLayout       : GovukLayout,
-  head              : Head,
-  hmrcStandardFooter: HmrcStandardFooter,
-  languageSelect    : LanguageSelect,
-  appConfig         : AppConfig
-)
+ @(pageTitle: Option[String] = None)(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
 
-@(
-  pageTitle   : Option[String] = None,
-  headBlock   : Option[Html]   = None,
-  scriptsBlock: Option[Html]   = None
-)(
-  contentBlock: Html
-)(implicit
-  request  : RequestHeader,
-  messages : Messages
-)
-
-@beforeContentBlock = {
-  @if(appConfig.welshLanguageSupportEnabled) {@languageSelect()}
-}
-
-@govukLayout(
-  pageTitle          = pageTitle,
-  headBlock          = Some(head(headBlock)),
-  scriptsBlock       = scriptsBlock,
-  beforeContentBlock = Some(beforeContentBlock),
-  footerBlock        = Some(hmrcStandardFooter())
-)(contentBlock)
+ @hmrcStandardPage(
+   HmrcStandardPageParams(
+     pageTitle = pageTitle,
+     isWelshTranslationAvailable = appConfig.welshLanguageSupportEnabled
+   )
+ )(contentBlock)

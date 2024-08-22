@@ -14,14 +14,9 @@
  * limitations under the License.
  *@
 
-@this(
-  layout   : Layout
-)
+@this(layout: Layout)
 
-@()(implicit
-  request : RequestHeader,
-  messages: Messages
-)
+@()(implicit request: RequestHeader, messages: Messages)
 
 @layout(pageTitle = Some("platops-example-frontend-microservice")) {
   <h1 class="govuk-heading-xl">Hello from platops-example-frontend-microservice</h1>

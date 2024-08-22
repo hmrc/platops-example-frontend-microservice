@@ -20,7 +20,6 @@ import play.api.i18n.Messages
 
 import javax.inject.{Inject, Singleton}
 import play.api.mvc.*
-import uk.gov.hmrc.example.config.AppConfig
 import uk.gov.hmrc.example.views.html.HelloWorldPage
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
