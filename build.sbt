@@ -2,8 +2,9 @@ import scoverage.ScoverageKeys
 import uk.gov.hmrc.DefaultBuildSettings
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin
 
-ThisBuild / majorVersion := 2
-ThisBuild / scalaVersion := "3.3.3"
+ThisBuild / majorVersion  := 2
+ThisBuild / scalaVersion  := "3.3.5"
+ThisBuild / scalacOptions += "-Wconf:msg=Flag.*repeatedly:s"
 
 lazy val microservice = Project("platops-example-frontend-microservice", file("."))
   .enablePlugins(play.sbt.PlayScala, SbtDistributablesPlugin)
@@ -13,8 +14,8 @@ lazy val microservice = Project("platops-example-frontend-microservice", file(".
   .settings(Test / test := ((Test / test).dependsOn(Node.npmVersion, Node.nodeVersion)).value)
   .settings(PlayKeys.playDefaultPort := 9930)
   .settings(
-    scalacOptions += "-Wconf:cat=unused-imports&src=html/.*:s",
-    scalacOptions += "-Wconf:src=routes/.*:s",
+    scalacOptions += "-Wconf:msg=unused import&src=html/.*:s",
+    scalacOptions += "-Wconf:src=routes/.*:s"
   )
 
 lazy val it = project
