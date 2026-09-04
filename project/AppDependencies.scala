@@ -2,12 +2,12 @@ import play.core.PlayVersion
 import sbt._
 
 object AppDependencies {
-  val bootstrapFrontendPlay = "9.11.0"
+  val bootstrapFrontendPlay = "9.19.0"
 
   val compile = Seq(
     "uk.gov.hmrc" %% "bootstrap-frontend-play-30"      % bootstrapFrontendPlay,
     "uk.gov.hmrc" %% "play-frontend-hmrc-play-30"      % "13.13.0",
-    "uk.gov.hmrc" %% "platops-example-library-play-30" % "1.0.0"
+    "uk.gov.hmrc" %% "platops-example-library-play-30" % "1.1.0"
   )
 
   val test = Seq(
